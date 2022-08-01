@@ -14,9 +14,10 @@
 <body class = "d-flex flex-column h-100" >
 <main class ="flex-shrink-0>"
 <div id="container">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 ">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5  justify-content-center  ">
 
-	<span  class="border-right navbar-text px-2">  TO DO LIST </span>
+	<span  class="w-25  navbar-text   bg-danger font-weight-bold text-center">  TO DO LIST </span>
 	
 
 </nav>
+

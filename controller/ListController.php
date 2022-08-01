@@ -13,7 +13,7 @@ function index()
 
 function addList(){
  
- render("lists/create");
+ render("lists/createList");
 }
 
 function createNewList(){
@@ -30,7 +30,7 @@ function editList($id){
 
 function updateList($id){
     updateL($id, $_POST["ListName"]);
-    header("location: ".URL."lists/index");
+    header("location: ".URL."list/index");
     
 
 }
@@ -46,7 +46,7 @@ function deleteList($id){
 function destroyList($id){
     
     destroyL($id);
-    header("location: ".URL."lists/index");
+    header("location: ".URL."list/index");
 	
     
 }
