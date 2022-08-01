@@ -1,12 +1,13 @@
 <?php
 require(ROOT . "model/ListModel.php");
+require(ROOT . "model/TaskModel.php");
 
 
 function index()
 {
    
     $getAllLists = getAllLists();
-    render("lists/index", array("lists" =>$getAllLists));
+    render("lists/index", array("lists" =>$getAllLists, "tasks" => getAllTasks()));
     
    
 }
@@ -25,7 +26,7 @@ function editList($id){
    
     $getList = getList($id);
    
-    render("lists/updateList", array("list" => $getList));
+    render("lists/updateList", array("list" => $getList, "tasks" => getAllTasks()));
 }
 
 function updateList($id){
@@ -38,7 +39,7 @@ function updateList($id){
 function deleteList($id){
    
     $getList = getList($id);
-    render("lists/deleteList", array("list" =>$getList));
+    render("lists/deleteList", array("list" =>$getList , "tasks" => getAllTasks()));
    
 
 }
