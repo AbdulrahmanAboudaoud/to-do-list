@@ -3,14 +3,18 @@ require(ROOT . "model/TaskModel.php");
 require(ROOT . "model/ListModel.php");
 
 
+
 function index()
 {
-   
-    $getAllTasks = getAllTasks();
-    render("lists/index", array("tasks" =>$getAllTasks, "lists" =>getAllLists()));
     
-   
-}
+    
+      
+        $getAllTasks = getAllTasks();
+        render("lists/index", array("tasks" =>$getAllTasks, "lists" =>getAllLists()));
+    
+}   
+
+  
 
 function addTask(){
  

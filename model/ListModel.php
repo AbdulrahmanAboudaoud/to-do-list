@@ -92,6 +92,26 @@ function createList($ListName){
     }
         $conn = null;
      }
+
+
+ function destroyLT($id){
+    try{
+        $conn=openDatabaseConnection();
+        $sql = "DELETE FROM tasks WHERE list_id = :id";
+        $query = $conn->prepare($sql);
+        $query->bindParam(":id", $id);
+       
+        $query->execute();
+      }
+    
+      catch(PDOException $e){
+    
+        echo "Connection failed: " . $e->getMessage();
+    }
+        $conn = null;
+     }
+
+   
     
 
 

@@ -1,10 +1,69 @@
 <?php 
+ 
+
 
 function getAllTasks(){
+   
+   $sort = "";
+   if(isset($_GET['sort_alphabet'])){
+            if($_GET['sort_alphabet'] == "a-z"){
+
+
+               $sort = "ASC";
+
+
+            }
+            elseif($_GET['sort_alphabet'] == "z-a" ){
+               
+                $sort = "DESC";
+
+
+            }  
+
+        }
+     $filter = "";
+     
+     if(isset($_GET['filter'])){
+        if($_GET['filter'] == "open"){
+
+
+           $filter = "open";
+
+
+        }
+        elseif($_GET['filter'] == "closed" ){
+           
+            $filter = "closed";
+
+
+        } 
+        elseif($_GET['filter'] == "in progress" ){
+           
+            $filter = "In Progress";
+
+
+        }   
+
+    }
+
+
     try {
-        
+       
         $conn=openDatabaseConnection();
+        if(isset($_GET['sort_alphabet'])){
+        $stmt = $conn->prepare("SELECT * FROM tasks ORDER BY TaskDuration $sort");
+
+        }
+        elseif(isset($_GET['filter'])){
+            $stmt = $conn->prepare("SELECT * FROM tasks WHERE TaskStatus = '$filter'");
+        }
+        elseif(isset($_GET['sort_alphabet']) && isset($_GET['filter'])){
+            $stmt = $conn->prepare("SELECT * FROM tasks WHERE TaskStatus = '$filter' ORDER BY TaskDuration $sort");   
+
+        }
+        else{
         $stmt = $conn->prepare("SELECT * FROM tasks");
+    }
         $stmt->execute();
         $result = $stmt->fetchAll();
  
@@ -17,6 +76,46 @@ function getAllTasks(){
     $conn = null;
     return $result;
 }
+
+function getAllTasksAsc($id){
+    try {
+       
+        $conn=openDatabaseConnection();
+        $stmt = $conn->prepare("SELECT * FROM tasks WHERE list_id = :id  ORDER BY TaskDescription ASC");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+ 
+    }
+    
+    catch(PDOException $e){
+       
+        echo "Connection failed: " . $e->getMessage();
+    }
+    $conn = null;
+    return $result;
+}
+
+function getAllTasksDesc($id){
+    try {
+       
+        $conn=openDatabaseConnection();
+        $stmt = $conn->prepare("SELECT * FROM tasks  WHERE list_id = :id ORDER BY TaskDescription DESC");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+ 
+    }
+    
+    catch(PDOException $e){
+       
+        echo "Connection failed: " . $e->getMessage();
+    }
+    $conn = null;
+    return $result;
+}
+
+
 
 function getTask($id){
     try {
@@ -71,7 +170,7 @@ function createTask($TaskDescription,$TaskDuration,$TaskStatus,$list_id){
         $query->bindParam(":TaskDescription", $TaskDescription);
         $query->bindParam(":TaskDuration", $TaskDuration);
         $query->bindParam(":TaskStatus", $TaskStatus);
-        $query->bindParam(":list_id", $list_id);
+        
 
         $query->execute();
       }

@@ -23,12 +23,20 @@
     
     <div class="form-group">
 	<label for="" class="lead">Task Status</label>
-    <input type="text" name="TaskStatus" class="form-control">
+	<select name="TaskStatus">
+	
+        <option value="open">Open</option>
+		<option value="In Progress">In Progress</option>
+		<option value="Closed">Closed</option>
+  
+    
+        </select>
 	</div>
+
 
     <div class="form-group">
 	<label for="" class="lead">List ID </label>
-    <input type="text" name="list_id" value = "<?php echo  $_GET['listid'];  ?>" class="form-control">
+    <input type="hidden" name="list_id" value = "<?php echo  $_GET['listid'];  ?>" class="form-control">
 	</div>
 	
 

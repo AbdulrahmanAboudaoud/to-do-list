@@ -47,6 +47,7 @@ function deleteList($id){
 function destroyList($id){
     
     destroyL($id);
+    destroyLT($id);
     header("location: ".URL."list/index");
 	
     
