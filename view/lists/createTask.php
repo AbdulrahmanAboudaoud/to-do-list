@@ -35,7 +35,7 @@
 
 
     <div class="form-group">
-	<label for="" class="lead">List ID </label>
+	<label for="" class="lead"></label>
     <input type="hidden" name="list_id" value = "<?php echo  $_GET['listid'];  ?>" class="form-control">
 	</div>
 	
